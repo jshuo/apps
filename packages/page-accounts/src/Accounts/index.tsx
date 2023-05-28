@@ -50,7 +50,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const { api } = useApi();
   const { allAccounts, hasAccounts } = useAccounts();
   const { isIpfs } = useIpfs();
-  const { isLedgerEnabled } = useLedger();
+  const  isSecuXEnabled   = true;
   const [isCreateOpen, toggleCreate, setIsCreateOpen] = useToggle();
   const [isImportOpen, toggleImport] = useToggle();
   const [isLedgerOpen, toggleLedger] = useToggle();
@@ -236,7 +236,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
             label={t<string>('Add account')}
             onClick={_openCreateModal}
           />
-          <Button
+          {/* <Button
             icon='sync'
             isDisabled={isIpfs}
             label={t<string>('Restore JSON')}
@@ -246,17 +246,17 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
             icon='qrcode'
             label={t<string>('Add via Qr')}
             onClick={toggleQr}
-          />
-          {isLedgerEnabled && (
+          /> */}
+          {isSecuXEnabled && (
             <>
               <Button
                 icon='project-diagram'
-                label={t<string>('Add via Ledger')}
+                label={t<string>('Connect to SecuX Hardware Wallet via USB')}
                 onClick={toggleLedger}
               />
             </>
           )}
-          <Button
+          {/* <Button
             icon='plus'
             isDisabled={!(api.tx.multisig || api.tx.utility) || !hasAccounts}
             label={t<string>('Multisig')}
@@ -267,7 +267,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
             isDisabled={!api.tx.proxy || !hasAccounts}
             label={t<string>('Proxied')}
             onClick={toggleProxy}
-          />
+          /> */}
         </Button.Group>
       </SummaryBox>
       <Table
@@ -292,5 +292,31 @@ export default React.memo(styled(Overview)`
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+
+  .ui--Button-Group {
+    margin: auto;
+    display: inline-block;
+    vertical-align: inherit;
+    -webkit-appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: brgb(0, 0, 255);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: buttonface;
+    box-sizing: border-box;
+    font: 400 11px system-ui;
+    padding: 1px 7px 2px;
+    // border-width: 3px;
+    // border-style: solid;
+    // border-image: initial;
   }
 `);

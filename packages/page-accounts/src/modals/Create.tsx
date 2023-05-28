@@ -154,7 +154,7 @@ function createAccount (seed: string, derivePath: string, pairType: PairType, { 
 function Create ({ className = '', onClose, onStatusChange, seed: propsSeed, type: propsType }: CreateProps): React.ReactElement<CreateProps> {
   const { t } = useTranslation();
   const { api, isDevelopment, isEthereum } = useApi();
-  const { isLedgerEnabled } = useLedger();
+  const { isSecuXEnabled } = useLedger();
   const [{ address, derivePath, deriveValidation, isSeedValid, pairType, seed, seedType }, setAddress] = useState<AddressState>(() => generateSeed(
     propsSeed,
     isEthereum ? ETH_DEFAULT_PATH : '',
@@ -308,7 +308,7 @@ function Create ({ className = '', onClose, onStatusChange, seed: propsSeed, typ
                   options={
                     isEthereum
                       ? settings.availableCryptosEth
-                      : isLedgerEnabled
+                      : isSecuXEnabled
                         ? settings.availableCryptosLedger
                         : settings.availableCryptos
                   }

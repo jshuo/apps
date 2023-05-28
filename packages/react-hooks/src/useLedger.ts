@@ -18,7 +18,7 @@ interface StateBase {
   hasLedgerChain: boolean;
   hasWebUsb: boolean;
   isLedgerCapable: boolean;
-  isLedgerEnabled: boolean;
+  isSecuXEnabled: boolean;
 }
 
 interface State extends StateBase {
@@ -29,7 +29,7 @@ const EMPTY_STATE: StateBase = {
   hasLedgerChain: false,
   hasWebUsb: false,
   isLedgerCapable: false,
-  isLedgerEnabled: false
+  isSecuXEnabled: false
 };
 
 const hasWebUsb = !!(window as unknown as { USB?: unknown }).USB;
@@ -64,7 +64,7 @@ function getState (api: ApiPromise): StateBase {
     hasLedgerChain,
     hasWebUsb,
     isLedgerCapable,
-    isLedgerEnabled: isLedgerCapable && uiSettings.ledgerConn !== 'none'
+    isSecuXEnabled: isLedgerCapable && uiSettings.ledgerConn !== 'none'
   };
 }
 
