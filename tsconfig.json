@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./packages",
     "composite": false,
+    "noUnusedLocals": false,   // just set this attribute false
     /*
      * We have a couple of issues that forces us to disable this -
      *  1. apps-electron is still CJS

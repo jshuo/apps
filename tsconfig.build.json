@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "composite": true
+    "composite": true,
+    "noUnusedLocals": false,   
   },
   "files": [],
   "references": [

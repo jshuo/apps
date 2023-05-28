@@ -32,6 +32,16 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       isDisabled: false,
       isHeader: true,
       isSpaced: true,
+      text: t('rpc.header.live', 'Live networks', { ns: 'apps-config' }),
+      textBy: '',
+      ui: {},
+      value: ''
+    },
+    ...expandEndpoints(t, prodChains, firstOnly, withSort),
+    {
+      isDisabled: false,
+      isHeader: true,
+      isSpaced: true,
       text: t('rpc.header.polkadot.relay', 'Polkadot & parachains', { ns: 'apps-config' }),
       textBy: '',
       ui: {},
@@ -66,16 +76,6 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       value: ''
     },
     ...expandEndpoints(t, [testRelayRococo], firstOnly, withSort),
-    {
-      isDisabled: false,
-      isHeader: true,
-      isSpaced: true,
-      text: t('rpc.header.live', 'Live networks', { ns: 'apps-config' }),
-      textBy: '',
-      ui: {},
-      value: ''
-    },
-    ...expandEndpoints(t, prodChains, firstOnly, withSort),
     {
       isDisabled: false,
       isHeader: true,

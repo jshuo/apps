@@ -63,31 +63,11 @@ function BannerExtension (): React.ReactElement | null {
 
   return (
     <Banner type='warning'>
-      <p>{t<string>('It is recommended that you create/store your accounts securely and externally from the app. On {{yourBrowser}} the following browser extensions are available for use -', {
-        replace: {
-          yourBrowser: stringUpperFirst(browserName)
-        }
-      })}</p>
-      <ul>{availableExtensions[browserName].map(({ desc, link, name }): React.ReactNode => (
-        <li key={name}>
-          <a
-            href={link}
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            {name}
-          </a> ({t(desc)})
-        </li>
-      ))
-      }</ul>
-      <p>{t<string>('Accounts injected from any of these extensions will appear in this application and be available for use. The above list is updated as more extensions with external signing capability become available.')}&nbsp;
-        <a
-          href='https://github.com/polkadot-js/extension'
-          rel='noopener noreferrer'
-          target='_blank'
-        >{t<string>('Learn more...')}</a>
+      {/* <p>{t<string>('Hardware wallets provide the best security for your private key since it never leaves the device when signing transactions. ')}</p>
+      // <p>{t<string>('Connect to SecuX Hardware Wallet via USB to manager your Aleph Zero Crypto ')}</p> */}
+      <p>{t<string>('Hardware wallets offer the highest level of security for safeguarding private keys as they remain within the device during transaction signing. To manage Aleph Zero Crypto, users can connect to the SecuX Hardware Wallet via USB. Private keys are securely stored in the SecuX Hardware Secure Element. It is important to remain vigilant against phishing attacks and to never disclose the 24-word recovery seed phrase, as SecuX will never request this information.')}&nbsp;
       </p>
-      <p>{phishing.current}</p>
+
     </Banner>
   );
 }

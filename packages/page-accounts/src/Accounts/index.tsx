@@ -92,7 +92,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const { api, isElectron } = useApi();
   const { allAccounts, hasAccounts } = useAccounts();
   const { isIpfs } = useIpfs();
-  const { isLedgerEnabled } = useLedger();
+  const  isLedgerEnabled   = useLedger();
   const [isCreateOpen, toggleCreate] = useToggle();
   const [isImportOpen, toggleImport] = useToggle();
   const [isLedgerOpen, toggleLedger] = useToggle();
@@ -309,29 +309,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       <BannerClaims />
       <Summary balance={balances.summary} />
       <SummaryBox className='header-box'>
-        <section
-          className='dropdown-section media--1300'
-          data-testid='sort-by-section'
-        >
-          <SortDropdown
-            className='media--1500'
-            defaultValue={sortBy}
-            label={t<string>('sort by')}
-            onChange={onSortChange}
-            onClick={onSortDirectionChange}
-            options={sortOptions.current}
-            sortDirection={
-              sortFromMax
-                ? 'ascending'
-                : 'descending'
-            }
-          />
-          <FilterInput
-            filterOn={filterOn}
-            label={t<string>('filter by name or tags')}
-            setFilter={setFilter}
-          />
-        </section>
         <Button.Group>
           {canStoreAccounts && (
             <>
@@ -347,19 +324,14 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
               />
             </>
           )}
-          <Button
-            icon='qrcode'
-            label={t<string>('From Qr')}
-            onClick={toggleQr}
-          />
           {isLedgerEnabled && (
             <Button
               icon='project-diagram'
-              label={t<string>('From Ledger')}
+              label={t<string>('Connect to SecuX Hardware Wallet via USB')}
               onClick={toggleLedger}
             />
           )}
-          {hasAccounts && (
+         {hasAccounts && (
             <>
               {hasPalletMultisig && (
                 <Button
@@ -416,7 +388,29 @@ const StyledDiv = styled.div`
     }
 
     .ui--Button-Group {
-      margin-left: auto;
+      margin: auto;
+      display: inline-block;
+      vertical-align: inherit;
+      -webkit-appearance: button;
+      -webkit-writing-mode: horizontal-tb !important;
+      text-rendering: auto;
+      color: brgb(0, 0, 255);
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+      text-align: center;
+      align-items: flex-start;
+      cursor: default;
+      background-color: buttonface;
+      box-sizing: border-box;
+      font: 400 11px system-ui;
+      padding: 1px 7px 2px;
+      border-width: 3px;
+      border-style: solid;
+      border-image: initial;
     }
   }
 `;

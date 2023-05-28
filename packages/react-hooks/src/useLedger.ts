@@ -29,7 +29,7 @@ const EMPTY_STATE: StateBase = {
   hasLedgerChain: false,
   hasWebUsb: false,
   isLedgerCapable: false,
-  isLedgerEnabled: false
+  isLedgerEnabled: true
 };
 
 const hasWebUsb = !!(window as unknown as { USB?: unknown }).USB;
