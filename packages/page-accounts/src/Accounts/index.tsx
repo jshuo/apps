@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 import { Button, FilterInput, SortDropdown, SummaryBox, Table } from '@polkadot/react-components';
 // import { useAccounts, useApi, useDelegations, useFavorites, useIpfs, useLedger, useLoadingDelay, useProxies, useToggle } from '@polkadot/react-hooks';
-import { useAccounts, useApi, useDelegations, useFavorites, useIpfs, useLoadingDelay, useProxies, useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useDelegations, useFavorites, useIpfs, useLoadingDelay, useProxies, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN_ZERO } from '@polkadot/util';
 
