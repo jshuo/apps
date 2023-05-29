@@ -68,6 +68,7 @@ const StyledDiv = styled.div`
       display: block;
 
       > label {
+        font-size: 1.2rem;
         margin: 0;
         min-width: 0;
         padding-right: 0;

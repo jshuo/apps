@@ -389,6 +389,7 @@ const StyledDiv = styled.div`
 
     .ui--Button-Group {
       margin: auto;
+      font-size: 1.5rem;
       // display: inline-block;
       // vertical-align: inherit;
       // -webkit-appearance: button;
