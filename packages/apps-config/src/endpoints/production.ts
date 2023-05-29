@@ -31,9 +31,9 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'aleph',
     providers: {
-      'Aleph Zero Foundation': 'wss://ws.azero.dev'
+      'SecuX Validator Node': 'wss://ws.azero.dev'
     },
-    text: 'Aleph Zero',
+    text: 'Aleph Zero via SecuX',
     ui: {
       color: '#00CCAB',
       logo: chainsAlephSVG
@@ -42,11 +42,34 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'Aetheras agence',
     providers: {
-      'Aetheras Foundation': 'wss://ws.takecopter.cloud.agence.network'
+      'via SecuX PUF Node': 'wss://ws.takecopter.cloud.agence.network'
     },
-    text: 'Aetheras Agence',
+    text: 'Aetheras Agence via SecuX PUF ',
     ui: {
       color: '#00CCAB',
+      logo: chainsAlephSVG
+    }
+  },
+  {
+    info: 'PolkaDot',
+    providers: {
+      'via OnFinality': 'wss://polkadot.api.onfinality.io/public-ws'
+    },
+    text: 'PolkaDot',
+    ui: {
+      color: '#00CCAB',
+      logo: chainsAlephSVG
+    }
+  },
+  {
+    info: 'statemint',
+    paraId: 1000,
+    providers: {
+      OnFinality: 'wss://statemint.api.onfinality.io/public-ws',
+    },
+    text: 'USD Tether(泰達幣) via Statemint',
+    ui: {
+      color: '#86e62a',
       logo: chainsAlephSVG
     }
   },

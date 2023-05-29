@@ -32,7 +32,7 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       isDisabled: false,
       isHeader: true,
       isSpaced: true,
-      text: t('rpc.header.live', 'Live networks', { ns: 'apps-config' }),
+      text: t('rpc.header.live', 'SecuX Wallet Support ONLY', { ns: 'apps-config' }),
       textBy: '',
       ui: {},
       value: ''
