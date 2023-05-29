@@ -40,11 +40,11 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
-    info: 'agence',
+    info: 'Aetheras agence',
     providers: {
       'Aetheras Foundation': 'wss://ws.takecopter.cloud.agence.network'
     },
-    text: 'Agence',
+    text: 'Aetheras Agence',
     ui: {
       color: '#00CCAB',
       logo: chainsAlephSVG
