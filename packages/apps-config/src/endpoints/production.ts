@@ -73,6 +73,24 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
       logo: chainsAlephSVG
     }
   },
+
+  {
+    homepage: 'https://moonbeam.network/networks/moonbeam/',
+    info: 'moonbeam',
+    paraId: 2004,
+    providers: {
+      'Automata 1RPC': 'wss://1rpc.io/glmr',
+      Blast: 'wss://moonbeam.public.blastapi.io',
+      'Moonbeam Foundation': 'wss://wss.api.moonbeam.network',
+      OnFinality: 'wss://moonbeam.api.onfinality.io/public-ws',
+      UnitedBloc: 'wss://moonbeam.unitedbloc.com'
+    },
+    text: 'Moonbeam',
+    ui: {
+      color: '#53cbc9',
+      logo: chainsAlephSVG
+    }
+  }
   // {
   //   info: 'Ares Odyssey',
   //   providers: {
