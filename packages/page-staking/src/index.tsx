@@ -79,7 +79,7 @@ function StakingApp ({ basePath, className = '' }: Props): React.ReactElement<Pr
     [ownStashes]
   );
 
-  const toggleLedger = useCallback(
+  const toggleSecuX = useCallback(
     () => setWithLedger(true),
     []
   );
@@ -188,7 +188,7 @@ function StakingApp ({ basePath, className = '' }: Props): React.ReactElement<Pr
                 stakingOverview={stakingOverview}
                 targets={targets}
                 toggleFavorite={toggleFavorite}
-                toggleLedger={toggleLedger}
+                toggleSecuX={toggleSecuX}
                 toggleNominatedBy={toggleNominatedBy}
               />
             }

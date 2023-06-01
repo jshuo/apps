@@ -17,7 +17,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { web3FromSource } from '@polkadot/extension-dapp';
 import { Button, ErrorBoundary, Modal, Output, styled, Toggle } from '@polkadot/react-components';
-import { useApi, useLedger, useQueue, useToggle } from '@polkadot/react-hooks';
+import { useApi, useSecuX, useQueue, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { assert, nextTick } from '@polkadot/util';
 import { addressEq } from '@polkadot/util-crypto';
@@ -194,7 +194,7 @@ function tryExtract (address: string | null): AddressFlags {
 function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAddress, setIsQueueSubmit }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
-  const { getLedger } = useLedger();
+  const { getLedger } = useSecuX();
   const { queueSetTxStatus } = useQueue();
   const [flags, setFlags] = useState(() => tryExtract(requestAddress));
   const [error, setError] = useState<Error | null>(null);

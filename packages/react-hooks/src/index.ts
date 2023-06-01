@@ -46,6 +46,7 @@ export { useIpfsLink } from './useIpfsLink.js';
 export { useIsMountedRef } from './useIsMountedRef.js';
 export { useJudgements } from './useJudgements.js';
 export { useKeyring } from './useKeyring.js';
+export { useSecuX } from './useSecuX.js';
 export { useLedger } from './useLedger.js';
 export { useMapEntries } from './useMapEntries.js';
 export { useMapKeys } from './useMapKeys.js';

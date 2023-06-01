@@ -4,7 +4,7 @@
 import type { ApiPromise } from '@polkadot/api';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { DeriveDemocracyLock, DeriveStakingAccount } from '@polkadot/api-derive/types';
-import type { Ledger } from '@polkadot/hw-ledger';
+import type { SecuX } from '@polkadot/hw-secux';
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
 import type { Option } from '@polkadot/types';
 import type { ProxyDefinition, RecoveryConfig } from '@polkadot/types/interfaces';
@@ -15,7 +15,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
 import { AddressInfo, AddressSmall, Badge, Button, ChainLock, Columar, CryptoType, Forget, LinkExternal, Menu, Popup, styled, Table, Tags, TransferModal } from '@polkadot/react-components';
-import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useLedger, useQueue, useStakingInfo, useToggle } from '@polkadot/react-hooks';
+import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useSecuX, useQueue, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN, BN_ZERO, formatBalance, formatNumber, isFunction } from '@polkadot/util';
 
@@ -136,10 +136,10 @@ function createClearReferendaTx (api: ApiPromise, address: string, ids: [BN, BN]
   return api.tx.utility.batch(inner);
 }
 
-async function showLedgerAddress (getLedger: () => Ledger, meta: KeyringJson$Meta): Promise<void> {
-  const ledger = getLedger();
+async function showSecuXAddress (getSecuX: () => SecuX, meta: KeyringJson$Meta): Promise<void> {
+  const secux = getSecuX();
 
-  await ledger.getAddress(true, meta.accountOffset as number || 0, meta.addressOffset as number || 0);
+  await secux.getAddress(true, meta.accountOffset as number || 0, meta.addressOffset as number || 0);
 }
 
 const transformRecovery = {
@@ -151,7 +151,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   const [isExpanded, toggleIsExpanded] = useToggle(false);
   const { queueExtrinsic } = useQueue();
   const api = useApi();
-  const { getLedger } = useLedger();
+  const { getSecuX } = useSecuX();
   const bestNumber = useBestNumber();
   const balancesAll = useBalancesAll(address);
   const stakingInfo = useStakingInfo(address);
@@ -181,8 +181,8 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   useEffect((): void => {
     if (balancesAll) {
       setBalance(address, {
-        // some chains don't have "active" in the Ledger
-        bonded: stakingInfo?.stakingLedger.active?.unwrap() || BN_ZERO,
+        // some chains don't have "active" in the SecuX
+        bonded: stakingInfo?.stakingSecuX.active?.unwrap() || BN_ZERO,
         locked: balancesAll.lockedBalance,
         redeemable: stakingInfo?.redeemable || BN_ZERO,
         total: balancesAll.freeBalance.add(balancesAll.reservedBalance),
@@ -290,13 +290,13 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
 
   const _showOnHardware = useCallback(
     // TODO: we should check the hardwareType from metadata here as well,
-    // for now we are always assuming hardwareType === 'ledger'
+    // for now we are always assuming hardwareType === 'secux'
     (): void => {
-      showLedgerAddress(getLedger, meta).catch((error): void => {
-        console.error(`ledger: ${(error as Error).message}`);
+      useLedger(getSecuX, meta).catch((error): void => {
+        console.error(`secux: ${(error as Error).message}`);
       });
     },
-    [getLedger, meta]
+    [getSecuX, meta]
   );
 
   const menuItems = useMemo(() => [

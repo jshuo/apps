@@ -28,7 +28,7 @@ interface Props {
   stakingOverview?: DeriveStakingOverview;
   targets: SortedTargets;
   toggleFavorite: (address: string) => void;
-  toggleLedger?: () => void;
+  toggleSecuX?: () => void;
   toggleNominatedBy: () => void;
 }
 
@@ -36,7 +36,7 @@ const EMPTY_PARA_VALS: Record<string, boolean> = {};
 const EMPTY_BY_AUTHOR: Record<string, string> = {};
 const EMPTY_ERA_POINTS: Record<string, string> = {};
 
-function Overview ({ className = '', favorites, hasAccounts, hasQueries, minCommission, nominatedBy, ownStashes, paraValidators, stakingOverview, targets, toggleFavorite, toggleLedger, toggleNominatedBy }: Props): React.ReactElement<Props> {
+function Overview ({ className = '', favorites, hasAccounts, hasQueries, minCommission, nominatedBy, ownStashes, paraValidators, stakingOverview, targets, toggleFavorite, toggleSecuX, toggleNominatedBy }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const { byAuthor, eraPoints } = useBlockAuthors();
@@ -68,8 +68,8 @@ function Overview ({ className = '', favorites, hasAccounts, hasQueries, minComm
   );
 
   useEffect((): void => {
-    toggleLedger && toggleLedger();
-  }, [toggleLedger]);
+    toggleSecuX && toggleSecuX();
+  }, [toggleSecuX]);
 
   const isOwn = typeIndex === 0;
 

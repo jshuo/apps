@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createLanguages, createSs58 } from '@polkadot/apps-config';
 import { allNetworks } from '@polkadot/networks';
 import { Button, Dropdown, MarkWarning } from '@polkadot/react-components';
-import { useApi, useIpfs, useLedger } from '@polkadot/react-hooks';
+import { useApi, useIpfs, useSecuX } from '@polkadot/react-hooks';
 import { settings } from '@polkadot/ui-settings';
 
 import { useTranslation } from './translate.js';
@@ -25,7 +25,7 @@ function General ({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { chainSS58, isApiReady, isElectron } = useApi();
   const { isIpfs } = useIpfs();
-  const { hasLedgerChain, hasWebUsb } = useLedger();
+  const { hasLedgerChain, hasWebUsb } = useSecuX();
   // tri-state: null = nothing changed, false = no reload, true = reload required
   const [changed, setChanged] = useState<boolean | null>(null);
   const [state, setSettings] = useState((): SettingsStruct => {

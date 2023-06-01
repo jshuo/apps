@@ -8,7 +8,7 @@ import React, { useCallback, useRef, useState } from 'react';
 
 import { DEV_PHRASE } from '@polkadot/keyring/defaults';
 import { AddressRow, Button, Checkbox, CopyButton, Dropdown, Expander, Input, MarkError, MarkWarning, Modal, styled, TextArea } from '@polkadot/react-components';
-import { useApi, useLedger, useStepper } from '@polkadot/react-hooks';
+import { useApi, useSecuX, useStepper } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { settings } from '@polkadot/ui-settings';
 import { isHex, nextTick, u8aToHex } from '@polkadot/util';
@@ -22,10 +22,12 @@ import CreateEthDerivationPath, { ETH_DEFAULT_PATH } from './CreateEthDerivation
 import CreateSuriLedger from './CreateSuriLedger.js';
 import ExternalWarning from './ExternalWarning.js';
 
-const DEFAULT_PAIR_TYPE = 'sr25519';
+const DEFAULT_PAIR_TYPE = 'ed25519-ledger';
+// const DEFAULT_PAIR_TYPE = 'sr25519';
 const STEPS_COUNT = 3;
 
 function getSuri (seed: string, derivePath: string, pairType: PairType): string {
+  // derivePath = 'm/44/643/0/0/0'
   return pairType === 'ed25519-ledger'
     ? u8aToHex(hdLedger(seed, derivePath).secretKey.slice(0, 32))
     : pairType === 'ethereum'
@@ -89,7 +91,8 @@ function newSeed (seed: string | undefined | null, seedType: SeedType): string {
 }
 
 function generateSeed (_seed: string | undefined | null, derivePath: string, seedType: SeedType, pairType: PairType = DEFAULT_PAIR_TYPE): AddressState {
-  const seed = newSeed(_seed, seedType);
+  // const seed = newSeed(_seed, seedType);
+  const seed = "dinner ritual subject term happy wall believe mansion offer climb claim width quantum index public gadget parent early tattoo pink pool sheriff trust smooth"
   const address = addressFromSeed(seed, derivePath, pairType);
 
   return {
@@ -153,7 +156,7 @@ function createAccount (seed: string, derivePath: string, pairType: PairType, { 
 function Create ({ className = '', onClose, onStatusChange, seed: propsSeed, type: propsType }: CreateProps): React.ReactElement<CreateProps> {
   const { t } = useTranslation();
   const { api, isDevelopment, isEthereum } = useApi();
-  const { isLedgerEnabled } = useLedger();
+  const { isLedgerEnabled } = useSecuX();
   const [{ address, derivePath, deriveValidation, isSeedValid, pairType, seed, seedType }, setAddress] = useState<AddressState>(() => generateSeed(
     propsSeed,
     isEthereum ? ETH_DEFAULT_PATH : '',
