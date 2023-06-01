@@ -7,4 +7,5 @@ import '@polkadot/api-augment/substrate';
 export { AccountSigner } from './AccountSigner.js';
 export { ApiSigner } from './ApiSigner.js';
 export { LedgerSigner } from './LedgerSigner.js';
+export { SecuXSigner } from './SecuXSigner.js';
 export { QrSigner } from './QrSigner.js';

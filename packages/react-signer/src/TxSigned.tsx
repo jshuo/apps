@@ -4,7 +4,7 @@
 import type { ApiPromise } from '@polkadot/api';
 import type { SignerOptions } from '@polkadot/api/submittable/types';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
-import type { Ledger } from '@polkadot/hw-ledger';
+import type { SecuX } from '@polkadot/hw-secux';
 import type { KeyringPair } from '@polkadot/keyring/types';
 import type { QueueTx, QueueTxMessageSetStatus } from '@polkadot/react-components/Status/types';
 import type { Option } from '@polkadot/types';
@@ -22,7 +22,7 @@ import { keyring } from '@polkadot/ui-keyring';
 import { assert, nextTick } from '@polkadot/util';
 import { addressEq } from '@polkadot/util-crypto';
 
-import { AccountSigner, LedgerSigner, QrSigner } from './signers/index.js';
+import { AccountSigner, SecuXSigner, QrSigner } from './signers/index.js';
 import Address from './Address.js';
 import Qr from './Qr.js';
 import SignFields from './SignFields.js';
@@ -162,12 +162,12 @@ async function wrapTx (api: ApiPromise, currentItem: QueueTx, { isMultiCall, mul
   return tx;
 }
 
-async function extractParams (api: ApiPromise, address: string, options: Partial<SignerOptions>, getLedger: () => Ledger, setQrState: (state: QrState) => void): Promise<['qr' | 'signing', string, Partial<SignerOptions>]> {
+async function extractParams (api: ApiPromise, address: string, options: Partial<SignerOptions>, getSecuX: () => SecuX, setQrState: (state: QrState) => void): Promise<['qr' | 'signing', string, Partial<SignerOptions>]> {
   const pair = keyring.getPair(address);
   const { meta: { accountOffset, addressOffset, isExternal, isHardware, isInjected, isProxied, source } } = pair;
 
   if (isHardware) {
-    return ['signing', address, { ...options, signer: new LedgerSigner(api.registry, getLedger, accountOffset as number || 0, addressOffset as number || 0) }];
+    return ['signing', address, { ...options, signer: new SecuXSigner(api.registry, getSecuX, accountOffset as number || 0, addressOffset as number || 0) }];
   } else if (isExternal && !isProxied) {
     return ['qr', address, { ...options, signer: new QrSigner(api.registry, setQrState) }];
   } else if (isInjected) {
@@ -194,7 +194,7 @@ function tryExtract (address: string | null): AddressFlags {
 function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAddress, setIsQueueSubmit }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
-  const { getLedger } = useSecuX();
+  const { getSecuX } = useSecuX();
   const { queueSetTxStatus } = useQueue();
   const [flags, setFlags] = useState(() => tryExtract(requestAddress));
   const [error, setError] = useState<Error | null>(null);
@@ -252,7 +252,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
           passwordError = unlockAccount(senderInfo);
         } else if (flags.isHardware) {
           try {
-            const ledger = getLedger();
+            const ledger = getSecuX();
             const { address } = await ledger.getAddress(false, flags.accountOffset, flags.addressOffset);
 
             console.log(`Signing with Ledger address ${address}`);
@@ -268,7 +268,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
 
       return !passwordError;
     },
-    [flags, getLedger, senderInfo, t]
+    [flags, getSecuX, senderInfo, t]
   );
 
   const _onSendPayload = useCallback(
@@ -290,7 +290,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
       if (senderInfo.signAddress) {
         const [tx, [status, pairOrAddress, options]] = await Promise.all([
           wrapTx(api, currentItem, senderInfo),
-          extractParams(api, senderInfo.signAddress, { nonce: -1, tip }, getLedger, setQrState)
+          extractParams(api, senderInfo.signAddress, { nonce: -1, tip }, getSecuX, setQrState)
         ]);
 
         queueSetTxStatus(currentItem.id, status);
@@ -298,7 +298,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
         await signAndSend(queueSetTxStatus, currentItem, tx, pairOrAddress, options);
       }
     },
-    [api, getLedger, tip]
+    [api, getSecuX, tip]
   );
 
   const _onSign = useCallback(
@@ -306,13 +306,13 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
       if (senderInfo.signAddress) {
         const [tx, [, pairOrAddress, options]] = await Promise.all([
           wrapTx(api, currentItem, senderInfo),
-          extractParams(api, senderInfo.signAddress, { ...signedOptions, tip }, getLedger, setQrState)
+          extractParams(api, senderInfo.signAddress, { ...signedOptions, tip }, getSecuX, setQrState)
         ]);
 
         setSignedTx(await signAsync(queueSetTxStatus, currentItem, tx, pairOrAddress, options));
       }
     },
-    [api, getLedger, signedOptions, tip]
+    [api, getSecuX, signedOptions, tip]
   );
 
   const _doStart = useCallback(

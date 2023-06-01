@@ -25,7 +25,7 @@ function General ({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { chainSS58, isApiReady, isElectron } = useApi();
   const { isIpfs } = useIpfs();
-  const { hasLedgerChain, hasWebUsb } = useSecuX();
+  const { hasSecuXChain, hasWebUsb } = useSecuX();
   // tri-state: null = nothing changed, false = no reload, true = reload required
   const [changed, setChanged] = useState<boolean | null>(null);
   const [state, setSettings] = useState((): SettingsStruct => {
@@ -169,7 +169,7 @@ function General ({ className = '' }: Props): React.ReactElement<Props> {
           )}
         </>
       )}
-      {hasLedgerChain && (
+      {hasSecuXChain && (
         <>
           <div className='ui--row'>
             <Dropdown

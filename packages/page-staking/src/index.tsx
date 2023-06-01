@@ -188,8 +188,8 @@ function StakingApp ({ basePath, className = '' }: Props): React.ReactElement<Pr
                 stakingOverview={stakingOverview}
                 targets={targets}
                 toggleFavorite={toggleFavorite}
-                toggleSecuX={toggleSecuX}
                 toggleNominatedBy={toggleNominatedBy}
+                toggleSecuX={toggleSecuX}
               />
             }
             path='targets'

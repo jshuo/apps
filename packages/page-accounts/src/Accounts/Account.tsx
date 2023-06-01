@@ -15,7 +15,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
 import { AddressInfo, AddressSmall, Badge, Button, ChainLock, Columar, CryptoType, Forget, LinkExternal, Menu, Popup, styled, Table, Tags, TransferModal } from '@polkadot/react-components';
-import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useSecuX, useQueue, useStakingInfo, useToggle } from '@polkadot/react-hooks';
+import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useQueue, useSecuX, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN, BN_ZERO, formatBalance, formatNumber, isFunction } from '@polkadot/util';
 
@@ -182,7 +182,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
     if (balancesAll) {
       setBalance(address, {
         // some chains don't have "active" in the SecuX
-        bonded: stakingInfo?.stakingSecuX.active?.unwrap() || BN_ZERO,
+        bonded: stakingInfo?.stakingLedger.active?.unwrap() || BN_ZERO,
         locked: balancesAll.lockedBalance,
         redeemable: stakingInfo?.redeemable || BN_ZERO,
         total: balancesAll.freeBalance.add(balancesAll.reservedBalance),
@@ -290,10 +290,10 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
 
   const _showOnHardware = useCallback(
     // TODO: we should check the hardwareType from metadata here as well,
-    // for now we are always assuming hardwareType === 'secux'
+    // for now we are always assuming hardwareType === 'ledger'
     (): void => {
-      useLedger(getSecuX, meta).catch((error): void => {
-        console.error(`secux: ${(error as Error).message}`);
+      showSecuXAddress(getSecuX, meta).catch((error): void => {
+        console.error(`ledger: ${(error as Error).message}`);
       });
     },
     [getSecuX, meta]

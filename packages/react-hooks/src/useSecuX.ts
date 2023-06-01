@@ -64,7 +64,7 @@ function getState (api: ApiPromise): StateBase {
     hasSecuXChain,
     hasWebUsb,
     isSecuXCapable,
-    isSecuXEnabled: isSecuXCapable && uiSettings.secuxConn !== 'none'
+    isSecuXEnabled: isSecuXCapable && uiSettings.ledgerConn !== 'none'
   };
 }
 

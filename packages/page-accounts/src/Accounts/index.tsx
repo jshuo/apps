@@ -11,18 +11,18 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { Button, FilterInput, SortDropdown, styled, SummaryBox, Table } from '@polkadot/react-components';
 import { getAccountCryptoType } from '@polkadot/react-components/util';
-import { useAccounts, useApi, useDelegations, useFavorites, useIpfs, useSecuX, useNextTick, useProxies, useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useApi, useDelegations, useFavorites, useIpfs, useNextTick, useProxies, useSecuX, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { settings } from '@polkadot/ui-settings';
 import { BN_ZERO, isFunction } from '@polkadot/util';
 
 import CreateModal from '../modals/Create.js';
 import ImportModal from '../modals/Import.js';
-// import Ledger from '../modals/Ledger.js';
-import SecuX from '../modals/secux.js';
 import Multisig from '../modals/MultisigCreate.js';
 import Proxy from '../modals/ProxiedAdd.js';
 import Qr from '../modals/Qr.js';
+// import Ledger from '../modals/Ledger.js';
+import SecuX from '../modals/SecuX.js';
 import { useTranslation } from '../translate.js';
 import { SORT_CATEGORY, sortAccounts } from '../util.js';
 import Account from './Account.js';
@@ -93,7 +93,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const { api, isElectron } = useApi();
   const { allAccounts, hasAccounts } = useAccounts();
   const { isIpfs } = useIpfs();
-  const  isLedgerEnabled   = useSecuX();
+  const isLedgerEnabled = useSecuX();
   const [isCreateOpen, toggleCreate] = useToggle();
   const [isImportOpen, toggleImport] = useToggle();
   const [isLedgerOpen, toggleSecuX] = useToggle();
@@ -332,7 +332,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
               onClick={toggleSecuX}
             />
           )}
-         {hasAccounts && (
+          {hasAccounts && (
             <>
               {hasPalletMultisig && (
                 <Button

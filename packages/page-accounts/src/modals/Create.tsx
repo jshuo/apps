@@ -92,7 +92,7 @@ function newSeed (seed: string | undefined | null, seedType: SeedType): string {
 
 function generateSeed (_seed: string | undefined | null, derivePath: string, seedType: SeedType, pairType: PairType = DEFAULT_PAIR_TYPE): AddressState {
   // const seed = newSeed(_seed, seedType);
-  const seed = "dinner ritual subject term happy wall believe mansion offer climb claim width quantum index public gadget parent early tattoo pink pool sheriff trust smooth"
+  const seed = 'dinner ritual subject term happy wall believe mansion offer climb claim width quantum index public gadget parent early tattoo pink pool sheriff trust smooth';
   const address = addressFromSeed(seed, derivePath, pairType);
 
   return {
@@ -156,7 +156,7 @@ function createAccount (seed: string, derivePath: string, pairType: PairType, { 
 function Create ({ className = '', onClose, onStatusChange, seed: propsSeed, type: propsType }: CreateProps): React.ReactElement<CreateProps> {
   const { t } = useTranslation();
   const { api, isDevelopment, isEthereum } = useApi();
-  const { isLedgerEnabled } = useSecuX();
+  const { isSecuXEnabled } = useSecuX();
   const [{ address, derivePath, deriveValidation, isSeedValid, pairType, seed, seedType }, setAddress] = useState<AddressState>(() => generateSeed(
     propsSeed,
     isEthereum ? ETH_DEFAULT_PATH : '',
@@ -306,7 +306,7 @@ function Create ({ className = '', onClose, onStatusChange, seed: propsSeed, typ
                   options={
                     isEthereum
                       ? settings.availableCryptosEth
-                      : isLedgerEnabled
+                      : isSecuXEnabled
                         ? settings.availableCryptosLedger
                         : settings.availableCryptos
                   }
