@@ -27,7 +27,8 @@ const DEFAULT_PAIR_TYPE = 'ed25519-ledger';
 const STEPS_COUNT = 3;
 
 function getSuri (seed: string, derivePath: string, pairType: PairType): string {
-  // derivePath = 'm/44/643/0/0/0'
+  derivePath = 'm/44/643/0/0/0'
+  // derivePath = "m/44'/643'/0'"
   return pairType === 'ed25519-ledger'
     ? u8aToHex(hdLedger(seed, derivePath).secretKey.slice(0, 32))
     : pairType === 'ethereum'
@@ -92,7 +93,7 @@ function newSeed (seed: string | undefined | null, seedType: SeedType): string {
 
 function generateSeed (_seed: string | undefined | null, derivePath: string, seedType: SeedType, pairType: PairType = DEFAULT_PAIR_TYPE): AddressState {
   // const seed = newSeed(_seed, seedType);
-  const seed = 'dinner ritual subject term happy wall believe mansion offer climb claim width quantum index public gadget parent early tattoo pink pool sheriff trust smooth';
+  const seed = 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
   const address = addressFromSeed(seed, derivePath, pairType);
 
   return {

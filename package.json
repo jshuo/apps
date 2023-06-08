@@ -28,6 +28,7 @@
   "scripts": {
     "analyze": "yarn clean && BUILD_ANALYZE=1 yarn run build:code && yarn source-map-explorer packages/apps/build/app.*.js",
     "build": "yarn run build:i18n && yarn run build:code",
+    "build-static": "yarn run build:i18n && yarn run build:code",
     "build:before": "yarn build:images && yarn build:typesBundle",
     "build:code": "NODE_ENV=production yarn polkadot-dev-build-ts",
     "build:devElectronMain": "cd packages/apps-electron && yarn polkadot-exec-webpack --config webpack.main.cjs",
@@ -68,6 +69,7 @@
   },
   "devDependencies": {
     "@crustio/crust-pin": "^1.0.0",
+    "@noble/curves": "^1.1.0",
     "@pinata/sdk": "^1.2.1",
     "@polkadot/dev": "^0.75.8",
     "@types/chart.js": "^2.9.37",
@@ -90,6 +92,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
+    "secux-substrate": "https://github.com/jshuo/secux-substrate-js.git",
     "source-map-explorer": "^2.5.3",
     "styled-components": "^5.3.10"
   },
