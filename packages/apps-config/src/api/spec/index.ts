@@ -4,6 +4,7 @@
 import type { OverrideBundleDefinition } from '@polkadot/types/types';
 
 import acala from './acala.js';
+import agence from './agence.js';
 import ajuna from './ajuna.js';
 import altair from './altair.js';
 import apron from './apron.js';
@@ -281,6 +282,7 @@ const spec: Record<string, OverrideBundleDefinition> = {
   subzero: zero,
   swapdex,
   t0rn,
+  'takecopter': agence,
   ternoa,
   'testnet-interlay': interbtc,
   'testnet-kintsugi': interbtc,
