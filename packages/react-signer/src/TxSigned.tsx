@@ -252,14 +252,14 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
           passwordError = unlockAccount(senderInfo);
         } else if (flags.isHardware) {
           try {
-            const ledger = getSecuX();
-            const { address } = await ledger.getAddress(false, flags.accountOffset, flags.addressOffset);
+            const secux = getSecuX();
+            const { address } = await secux.getAddress(false, flags.accountOffset, flags.addressOffset);
 
-            console.log(`Signing with Ledger address ${address}`);
+            console.log(`Signing with SecuX address ${address}`);
           } catch (error) {
             console.error(error);
 
-            passwordError = t<string>('Unable to connect to the Ledger, ensure support is enabled in settings and no other app is using it. {{error}}', { replace: { error: (error as Error).message } });
+            passwordError = t<string>('Unable to connect to the SecuX, ensure support is enabled in settings and no other app is using it. {{error}}', { replace: { error: (error as Error).message } });
           }
         }
       }

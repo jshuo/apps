@@ -10,19 +10,19 @@ let id = 0;
 export class SecuXSigner implements Signer {
   readonly #accountOffset: number;
   readonly #addressOffset: number;
-  readonly #getLedger: () => SecuX;
+  readonly #getSecuX: () => SecuX;
   readonly #registry: Registry;
 
-  constructor (registry: Registry, getLedger: () => SecuX, accountOffset: number, addressOffset: number) {
+  constructor (registry: Registry, getSecuX: () => SecuX, accountOffset: number, addressOffset: number) {
     this.#accountOffset = accountOffset;
     this.#addressOffset = addressOffset;
-    this.#getLedger = getLedger;
+    this.#getSecuX = getSecuX;
     this.#registry = registry;
   }
 
   public async signPayload (payload: SignerPayloadJSON): Promise<SignerResult> {
     const raw = this.#registry.createType('ExtrinsicPayload', payload, { version: payload.version });
-    const { signature } = await this.#getLedger().sign(raw.toU8a(true), this.#accountOffset, this.#addressOffset);
+    const { signature } = await this.#getSecuX().sign(raw.toU8a(true), this.#accountOffset, this.#addressOffset);
 
     return { id: ++id, signature };
   }

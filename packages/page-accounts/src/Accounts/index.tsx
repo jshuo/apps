@@ -93,10 +93,10 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const { api, isElectron } = useApi();
   const { allAccounts, hasAccounts } = useAccounts();
   const { isIpfs } = useIpfs();
-  const isLedgerEnabled = useSecuX();
+  const isSecuXEnabled = useSecuX();
   const [isCreateOpen, toggleCreate] = useToggle();
   const [isImportOpen, toggleImport] = useToggle();
-  const [isLedgerOpen, toggleSecuX] = useToggle();
+  const [isSecuXOpen, toggleSecuX] = useToggle();
   const [isMultisigOpen, toggleMultisig] = useToggle();
   const [isProxyOpen, toggleProxy] = useToggle();
   const [isQrOpen, toggleQr] = useToggle();
@@ -285,7 +285,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
           onStatusChange={onStatusChange}
         />
       )}
-      {isLedgerOpen && (
+      {isSecuXOpen && (
         <SecuX onClose={toggleSecuX} />
       )}
       {isMultisigOpen && (
@@ -325,7 +325,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
               />
             </>
           )}
-          {isLedgerEnabled && (
+          {isSecuXEnabled && (
             <Button
               icon='project-diagram'
               label={t<string>('Connect to SecuX Hardware Wallet via USB')}
