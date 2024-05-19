@@ -3,6 +3,7 @@
 
 // Do not edit. Auto-generated via node scripts/imgConvert.mjs
 
+export { nodesAgenceSVG } from './generated/agenceSVG.js';
 export { nodesAjunaPNG } from './generated/ajunaPNG.js';
 export { nodesApronPNG } from './generated/apronPNG.js';
 export { nodesArcticPNG } from './generated/arcticPNG.js';
